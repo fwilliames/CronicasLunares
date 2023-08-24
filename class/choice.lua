@@ -2,10 +2,10 @@ local class = ("libs.middleclass")
 
 local Choice = class("Choice") ---@class Choice
 
-    function Choice:initialize()
-        self.description = nil ---@type string
-        self.destination = nil ---@type string
-        self.condition = nil 
+    function Choice:initialize(newDestination, newDescription, newCondition)
+        self.destination = newDestination ---@type string
+        self.description = newDescription ---@type string
+        self.condition = newCondition 
         
     end
     
