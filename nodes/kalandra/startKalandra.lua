@@ -1,5 +1,6 @@
-local Node = require("class.Node")
-local Choice = require("class.choice")
+local Node = require("Classs.Node")
+local Choice = require("Classs.choice")
+local class = ("libs.middleclass")
 
 local START_ID <const> = "startKalandra"
 
