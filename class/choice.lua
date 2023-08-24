@@ -67,6 +67,4 @@ local Choice = class("Choice") ---@class Choice
         
         return true
     end
-
-
 return Choice
