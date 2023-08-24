@@ -1,11 +1,11 @@
-local Node = require("Classs.Node")
-local Choice = require("Classs.choice")
-local class = ("libs.middleclass")
+local Node = require("class.Node")
+local Choice = require("class.choice")
+local class = require("libs.middleclass")
 
 local START_ID <const> = "start"
 
 --Create the Start Node
-local startNode = Node:new(startID) ---@type Node
+local startNode = Node:new(START_ID) ---@type Node
     startNode.description = "Em uma bela manha ensolarada vc acorda para embarcar em uma nova aventura. Uma importante decisao deve ser tomada. Para onde vc vai?"
     startNode.header =[[
          ██████╗██████╗  ██████╗ ███╗   ██╗██╗ ██████╗ █████╗ ███████╗    ██╗     ██╗   ██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗

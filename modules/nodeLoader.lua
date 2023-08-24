@@ -42,7 +42,7 @@ end
 
     ---Return the nodeID's associated node
     function nodeLoader.getNode(nodeID)
-        return nodeDictionay(nodeID)
+        return nodeDictionay[nodeID]
         
     end
 

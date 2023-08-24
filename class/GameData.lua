@@ -1,4 +1,5 @@
-local class = ("libs.middleclass")
+local class = require("libs.middleclass")
+local Node = require("class.Node")
 
 local GameData = class("GameData") --- @class GameData
 

@@ -1,4 +1,4 @@
-local class = ("libs.middleclass")
+local class = require("libs.middleclass")
 
 local Choice = class("Choice") ---@class Choice
 

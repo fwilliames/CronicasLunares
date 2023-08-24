@@ -9,6 +9,6 @@ _G.game = myGameData --definindo game como singleton
 
 nodeLoader.loadNodes()
 
-for id, node in pairs(nodeLoader.getNode()) do
-    print(id,node.description)
+for id, node in pairs(nodeLoader.getNodes()) do
+    print(id,node.title)
 end
