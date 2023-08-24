@@ -104,5 +104,4 @@ local nodeLoader = {}
     function nodeLoader.getInitialNoder()
         return initialNode
     end
-
 return nodeLoader    
