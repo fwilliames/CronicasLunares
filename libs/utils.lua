@@ -20,7 +20,7 @@ local utils = {}
     function utils.cardLimite()
         local limit = "="
         local result = ""
-        for i = 1, 100, 1 do
+        for i = 1, 151, 1 do
             result = result .. limit
         end
         print(result)
