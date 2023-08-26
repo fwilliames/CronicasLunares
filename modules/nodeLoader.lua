@@ -101,7 +101,7 @@ local nodeLoader = {}
         Usage:
         local initialNode = nodeLoader.getInitialNode()
     ]]
-    function nodeLoader.getInitialNoder()
+    function nodeLoader.getInitialNode()
         return initialNode
     end
 return nodeLoader    
