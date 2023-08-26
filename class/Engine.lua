@@ -10,16 +10,28 @@ local Engine = class("Engine")
     end
 
     function Engine:runMainLoop()
-        local node = game.activeNode
+        
 
         while not game.isOver do
+            os.execute("cls")
+            local node = game.activeNode
             self:printNode(node)
 
             local validChoices = self:getValidChoices(node)
 
             self:showChoices(validChoices)
+
+            local choiceId = self:askForInput(#validChoices) 
             
-            game.isOver = true -- para encerrar o game 
+            print(validChoices[choiceId].destination) --DEBUG
+
+            local choice = validChoices[choiceId]
+
+            local destinationId = choice.destination
+            local destinationNode = nodeLoader.getNode(destinationId)
+             game.activeNode = destinationNode
+
+            --game.isOver = true -- para encerrar o game 
         end
 
        
@@ -55,6 +67,21 @@ local Engine = class("Engine")
             )
         end
 
+    end
+
+    function Engine:askForInput(amount)
+        while true do
+            io.write("> ")
+            local answerStr = io.read()
+            local answer = tonumber(answerStr)
+            local answerIsValid = answer ~= nil and answer >= 1 and answer <= amount
+    
+            if answerIsValid then
+                return answer
+            end
+            io.write("Resposta invalida, tente novamente \n")
+        end
+       
     end
 
 return Engine
