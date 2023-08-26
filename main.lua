@@ -1,15 +1,23 @@
 local GameData = require("class.GameData")
 local nodeLoader = require("modules.nodeLoader")
+local utils = require("libs.utils")
+local Engine = require("class.Engine")
+
+utils.enableUtf8()
 
 -- Create GameData
----@diagnostic disable-next-line: undefined-field
+
 local myGameData = GameData:new() ---@type GameData
 _G.game = myGameData --definindo game como singleton
 
 --Load Nodes
 
 nodeLoader.loadNodes()
+ game.activeNode = nodeLoader.getInitialNode()
 
-for id, node in pairs(nodeLoader.getNodes()) do
-    print(id,node.title)
-end
+--Start Engine
+
+local myEngine = Engine:new() ---@type Engine
+myEngine:runMainLoop()
+
+
