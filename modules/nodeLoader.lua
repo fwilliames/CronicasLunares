@@ -66,7 +66,7 @@ local nodeLoader = {}
 
         for id, node in pairs(nodeDictionary) do
             for _, choice in pairs(node.choices) do
-                local destinationId = choice.getDestination()
+                local destinationId = choice:getDestination()
                 local destinationNode = nodeDictionary[destinationId]
                 if destinationNode == nil then
                     warn(

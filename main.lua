@@ -4,6 +4,7 @@ local utils = require("libs.utils")
 local Engine = require("class.Engine")
 
 utils.enableUtf8()
+warn("@on")
 
 -- Create GameData
 
@@ -16,7 +17,7 @@ nodeLoader.loadNodes()
  game.activeNode = nodeLoader.getInitialNode()
 
 --Check for erros in nodeLoader
-if nodeLoader.hasError then
+if nodeLoader.hasError() then
     print("Erros encontrados no nodeLoader")
     os.exit()
 end

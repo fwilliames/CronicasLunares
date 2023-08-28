@@ -2,11 +2,11 @@ local class = require("libs.middleclass")
 
 local Choice = class("Choice") ---@class Choice
 
-    function Choice:initialize(newDestination, newDescription, newCondition)
+    function Choice:initialize(newDestination, newDescription, newCondition, newRoutine)
         self.destination = newDestination ---@type string
         self.description = newDescription ---@type string
-        self.condition = newCondition 
-        
+        self.condition = newCondition ---@type fun():boolean
+        self.routine = newRoutine ---@type function
     end
     
     --Get and Set methods
@@ -64,7 +64,15 @@ local Choice = class("Choice") ---@class Choice
         end
     ]]
     function Choice:runCondition()
-        
+        if self.condition ~= nil and type(self.condition) == "function" then
+            return self.condition()
+        end
         return true
+    end
+
+    function Choice:runRoutine()
+        if self.routine ~= nil and type(self.routine) == "function" then
+            self.routine()
+        end    
     end
 return Choice

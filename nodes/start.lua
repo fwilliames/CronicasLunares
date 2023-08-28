@@ -23,7 +23,6 @@ local startNode = Node:new(START_ID) ---@type Node
     --Create the Choices
     table.insert(
         startNode.choices,
-        ---@diagnostic disable-next-line: undefined-field
         Choice:new( 
         "startKalandra",
         "Para Praia Ensolarada"
@@ -32,11 +31,11 @@ local startNode = Node:new(START_ID) ---@type Node
 
     table.insert(
         startNode.choices,
-        ---@diagnostic disable-next-line: undefined-field
         Choice:new(
         "startNyff",
         "Para a Montanha Gelada"
         )
     )
+    
 
 return startNode
