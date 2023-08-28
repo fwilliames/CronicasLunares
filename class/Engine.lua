@@ -2,11 +2,22 @@ local class = require("libs.middleclass")
 local nodeLoader = require("modules.nodeLoader")
 local utils = require("libs.utils")
 local choice= require("class.choice")
+local ansicolorsx = require("libs.ansicolorsx")
 
 ---@class Engine
 local Engine = class("Engine")
 
     function Engine:initialize()
+    end
+
+    local function print(...)
+        _G.print(ansicolorsx(...))
+        
+    end
+
+    local function iowrite(...)
+        io.write(ansicolorsx(...))
+        
     end
 
     --[[ 
@@ -26,7 +37,8 @@ local Engine = class("Engine")
     function Engine:runMainLoop()
         
         while not game.isOver do
-            os.execute("cls")
+            utils.clearScreen()
+            
             local node = game.activeNode
             self:printNode(node)
 
@@ -66,7 +78,9 @@ local Engine = class("Engine")
             print()
             print(node.header)
         end
-        print(node.title)
+        print( 
+            string.format("%%{white}----------[%%{yellow}%s%%{white}]----------", node.title)
+        )
         print(node.description)
         utils.cardLimite()
     end
@@ -109,7 +123,7 @@ local Engine = class("Engine")
     function Engine:showChoices(listChoices)
         for i, choice in pairs(listChoices) do
             print(
-                string.format("%d) %s", i, choice.description) 
+                string.format("%%{white}%d) %%{yellow}%s", i, choice.description) 
             )
         end
 
@@ -129,7 +143,7 @@ local Engine = class("Engine")
     ]]
     function Engine:askForInput(amount)
         while true do
-            io.write("> ")
+            iowrite("> ")
             local answerStr = io.read()
             local answer = tonumber(answerStr)
             local answerIsValid = answer ~= nil and answer >= 1 and answer <= amount
@@ -137,7 +151,7 @@ local Engine = class("Engine")
             if answerIsValid then
                 return answer
             end
-            io.write("Resposta invalida, tente novamente \n")
+            iowrite("%{red}Resposta invalida, tente novamente \n")
         end    
     end
 
