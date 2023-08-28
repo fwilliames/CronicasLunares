@@ -2,7 +2,7 @@ local Node = require("class.Node")
 local Choice = require("class.choice")
 local class = require("libs.middleclass")
 
-local START_ID <const> = "startKalandra"
+local START_ID <const> = "kalandra.startKalandra"
 
 --Create the Start Node
 ---@diagnostic disable-next-line: undefined-field
@@ -33,14 +33,14 @@ local startKalandra = Node:new(START_ID) ---@type Node
         "startKalandra",
         "Para Praia Ensolarada"
         )
-    )
+    )]]
 
     table.insert(
         startKalandra.choices,
         Choice:new(
-        "startKalandra",
+        "start",
         "Para a Montanha Gelada"
         )
-    )]]
+    )
 
 return startKalandra

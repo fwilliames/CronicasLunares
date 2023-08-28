@@ -36,16 +36,31 @@ local nodeLoader = {}
         if not success then
             warn("Falha ao carregar o node " .. path .. ". O arquivo nao foi encontrado")
             hasError = true
-            return
+            return nil
         end
 
         local node = nodeOrErr ---@type Node
         if nodeDictionary[node.id] ~= nil then
             warn("Falha ao carregar o node " .. path .. "O ID" .. node.id .. "Ja esta registrado")
             hasError = true
-            return
+            return nil
         end
         nodeDictionary[node.id] = node
+        return node
+    end
+
+    
+    
+    local function loadNodesFromChoices(parentNode)
+        for _, choice in pairs(parentNode.choices) do
+            local destinationId = choice:getDestination()
+            if not nodeDictionary[destinationId] then 
+                local childNode  = loadNode("nodes." .. destinationId)
+                if childNode then
+                    loadNodesFromChoices(childNode)
+                end
+            end
+        end
     end
     --[[
         Loads the game nodes and adds them to the node dictionary.
@@ -61,9 +76,10 @@ local nodeLoader = {}
         nodeDictionary[initialNode.id] = initialNode
 
         --Load others Nodes
-        loadNode("nodes.nyff.startNyff")
-        loadNode("nodes.kalandra.startKalandra")
-        loadNode("nodes.nyff.nyffCongelou")
+        --loadNode("nodes.nyff.startNyff")
+        --loadNode("nodes.kalandra.startKalandra")
+        --loadNode("nodes.nyff.nyffCongelou")
+        loadNodesFromChoices(initialNode)
         
 
 
@@ -137,4 +153,5 @@ local nodeLoader = {}
     function nodeLoader.hasError()
         return hasError 
     end
+
 return nodeLoader    

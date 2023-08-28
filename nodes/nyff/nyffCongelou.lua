@@ -2,7 +2,7 @@ local Node = require("class.Node")
 local Choice = require("class.choice")
 local class = require("libs.middleclass")
 
-local START_ID <const> = "nyffCongelou"
+local START_ID <const> = "nyff.nyffCongelou"
 
 --Create the Start Node
 local nyffCongelou = Node:new(START_ID) ---@type Node

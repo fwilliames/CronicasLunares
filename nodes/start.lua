@@ -24,7 +24,7 @@ local startNode = Node:new(START_ID) ---@type Node
     table.insert(
         startNode.choices,
         Choice:new( 
-        "startKalandra",
+        "kalandra.startKalandra",
         "Para Praia Ensolarada"
         )
     )
@@ -32,7 +32,7 @@ local startNode = Node:new(START_ID) ---@type Node
     table.insert(
         startNode.choices,
         Choice:new(
-        "startNyff",
+        "nyff.startNyff",
         "Para a Montanha Gelada"
         )
     )

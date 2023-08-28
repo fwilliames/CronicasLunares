@@ -2,7 +2,7 @@ local Node = require("class.Node")
 local Choice = require("class.choice")
 local class = require("libs.middleclass")
 
-local START_ID <const> = "startNyff"
+local START_ID <const> = "nyff.startNyff"
 
 --Create the Start Node
 ---@diagnostic disable-next-line: undefined-field
@@ -39,7 +39,7 @@ local startNyff = Node:new(START_ID) ---@type Node
     table.insert(
         startNyff.choices,
         Choice:new(
-        "nyffCongelou",
+        "nyff.nyffCongelou",
         "O frio é psicologico"
         )
     )
