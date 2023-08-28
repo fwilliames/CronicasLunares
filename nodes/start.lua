@@ -8,7 +8,7 @@ local START_ID <const> = "start"
 ---@diagnostic disable-next-line: undefined-field
 local startNode = Node:new(START_ID) ---@type Node
     startNode.description = "Em uma bela manha ensolarada vc acorda para embarcar em uma nova aventura. Uma importante decisao deve ser tomada. Para onde vc vai?"
-    startNode.header =[[
+    startNode.header =[[%{blue}
          ██████╗██████╗  ██████╗ ███╗   ██╗██╗ ██████╗ █████╗ ███████╗    ██╗     ██╗   ██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗
         ██╔════╝██╔══██╗██╔═══██╗████╗  ██║██║██╔════╝██╔══██╗██╔════╝    ██║     ██║   ██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝
         ██║     ██████╔╝██║   ██║██╔██╗ ██║██║██║     ███████║███████╗    ██║     ██║   ██║██╔██╗ ██║███████║██████╔╝█████╗  ███████╗
