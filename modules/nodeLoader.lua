@@ -14,32 +14,38 @@ local nodeLoader = {}
         Type:
         - nodeDictionary: A table that associates strings with objects of type Node.
     ]]
-    local nodeDictionay = {} ---@type table<string,Node>
+    local nodeDictionary = {} ---@type table<string,Node>
 
-    --[[
-        Loads a node from a path and adds it to the node dictionary.
+    local hasError = false
 
-        Parameters:
-        - path: The path to the node file.
+    --[[ 
+        Loads the game nodes and adds them to the node dictionary.
+
+        This function loads the initial node and additional nodes specified in the code, adding them to the node
+        dictionary for later use. It also checks the validity of the choices' destinations and logs warnings for
+        any inconsistencies.
 
         Usage:
-        loadNode(path)
+        nodeLoader.loadNodes()
     ]]
     local function loadNode(path)
-        local node = require(path)
+        local success , nodeOrErr = pcall(function ()
+            return require(path)
+        end)
 
-        if node == nil then
-            warn("Falha ao carregar, o node nao existe")
+        if not success then
+            warn("Falha ao carregar o node " .. path .. ". O arquivo nao foi encontrado")
+            hasError = true
             return
         end
 
-        if nodeDictionay[node.id] ~= nil then
-            warn("Falha ao carregar, o node ja existe")
+        local node = nodeOrErr ---@type Node
+        if nodeDictionary[node.id] ~= nil then
+            warn("Falha ao carregar o node " .. path .. "O ID" .. node.id .. "Ja esta registrado")
+            hasError = true
             return
         end
-
-        nodeDictionay[node.id] = node
-        
+        nodeDictionary[node.id] = node
     end
     --[[
         Loads the game nodes and adds them to the node dictionary.
@@ -48,17 +54,28 @@ local nodeLoader = {}
         nodeLoader.loadNodes()
     ]]
     function nodeLoader.loadNodes()
-        nodeDictionay = {}
+        nodeDictionary = {}
 
         --- Load initialNode
         initialNode = require("nodes.start")
-        nodeDictionay[initialNode.id] = initialNode
+        nodeDictionary[initialNode.id] = initialNode
 
         --Load others Nodes
         loadNode("nodes.nyff.startNyff")
         loadNode("nodes.kalandra.startKalandra")
 
-        
+        for id, node in pairs(nodeDictionary) do
+            for _, choice in pairs(node.choices) do
+                local destinationId = choice.getDestination()
+                local destinationNode = nodeDictionary[destinationId]
+                if destinationNode == nil then
+                    warn(
+                        string.format("Uma das escolhas do node %s tem um destino inexistente: %s",node.id, destinationId)
+                    )
+                    hasError = true
+                end
+            end
+        end     
     end
 
     --[[
@@ -71,7 +88,7 @@ local nodeLoader = {}
         local nodes = nodeLoader.getNodes()
     ]]
     function nodeLoader.getNodes()
-        return nodeDictionay 
+        return nodeDictionary 
         
     end
 
@@ -88,7 +105,7 @@ local nodeLoader = {}
         local node = nodeLoader.getNode(nodeID)
     ]]
     function nodeLoader.getNode(nodeID)
-        return nodeDictionay[nodeID]
+        return nodeDictionary[nodeID]
         
     end
 
@@ -103,5 +120,18 @@ local nodeLoader = {}
     ]]
     function nodeLoader.getInitialNode()
         return initialNode
+    end
+
+    --[[ 
+        Checks if there is an error condition during node loading.
+        
+        This function returns a boolean value indicating whether an error condition occurred during the process
+        of loading nodes.
+
+        Returns:
+        - hasError: A boolean value indicating if an error occurred during node loading.
+    ]]
+    function nodeLoader.hasError()
+        return hasError 
     end
 return nodeLoader    

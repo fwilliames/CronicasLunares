@@ -15,6 +15,12 @@ _G.game = myGameData --definindo game como singleton
 nodeLoader.loadNodes()
  game.activeNode = nodeLoader.getInitialNode()
 
+--Check for erros in nodeLoader
+if nodeLoader.hasError then
+    print("Erros encontrados no nodeLoader")
+    os.exit()
+end
+
 --Start Engine
 
 local myEngine = Engine:new() ---@type Engine
