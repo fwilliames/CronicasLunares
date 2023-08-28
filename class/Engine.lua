@@ -46,9 +46,22 @@ local Engine = class("Engine")
             --Print the node
             self:printNode(node)
 
+            --Process the end game
+            if node.gameOver then
+                print()
+                print("%{red}---------- Game Over ----------")
+                os.exit()
+            elseif node.gameWin then
+                print()
+                print("%{green}--------- Voce Venceu ----------")
+                os.exit()
+            end
             --Get the valid nodes
             local validChoices = self:getValidChoices(node)
-
+            if #validChoices == 0 then
+                warn("Nenhum escolha valida para o node " .. node.id)
+                os.exit()
+            end
             --Show the choices
             self:showChoices(validChoices)
 
@@ -86,6 +99,8 @@ local Engine = class("Engine")
             utils.cardLimite()
             print()
             print(node.header)
+        elseif node.gameOver then
+            print(utils.getGenericGameOverHeader())
         end
         print( 
             string.format("%%{white}----------[%%{yellow}%s%%{white}]----------", node.title)

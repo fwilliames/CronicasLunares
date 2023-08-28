@@ -63,6 +63,9 @@ local nodeLoader = {}
         --Load others Nodes
         loadNode("nodes.nyff.startNyff")
         loadNode("nodes.kalandra.startKalandra")
+        loadNode("nodes.nyff.nyffCongelou")
+        
+
 
         for id, node in pairs(nodeDictionary) do
             for _, choice in pairs(node.choices) do

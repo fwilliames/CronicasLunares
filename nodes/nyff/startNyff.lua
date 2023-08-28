@@ -34,14 +34,14 @@ local startNyff = Node:new(START_ID) ---@type Node
         "startKalandra",
         "Para Praia Ensolarada"
         )
-    )
+    )]]
 
     table.insert(
         startNyff.choices,
         Choice:new(
-        "startNyff",
-        "Para a Montanha Gelada"
+        "nyffCongelou",
+        "O frio é psicologico"
         )
-    )]]
+    )
 
 return startNyff

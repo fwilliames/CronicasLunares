@@ -8,6 +8,8 @@ local Node = class("Node") ---@class Node
         self.description = nil --- @type string
         self.header = nil --- @type string
         self.choices = {} ---@type Choice{}
+        self.gameOver = false ---@type boolean
+        self.gameWin = false ---@type boolean
         
     end
 
