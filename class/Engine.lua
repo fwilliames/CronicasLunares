@@ -35,26 +35,35 @@ local Engine = class("Engine")
         None
     ]]
     function Engine:runMainLoop()
-        
+        --Main loop
         while not game.isOver do
+            --Clear Terminal
             utils.clearScreen()
-            
+
+            --Get the Active node
             local node = game.activeNode
+
+            --Print the node
             self:printNode(node)
 
+            --Get the valid nodes
             local validChoices = self:getValidChoices(node)
 
+            --Show the choices
             self:showChoices(validChoices)
 
+            --Ask to the User
             local choiceId = self:askForInput(#validChoices) 
-            
             print(validChoices[choiceId].destination) --DEBUG
-
             local choice = validChoices[choiceId]
 
+            --Run the choice's routine
+            choice:runRoutine()
+
+            --Go to the next Node
             local destinationId = choice.destination
             local destinationNode = nodeLoader.getNode(destinationId)
-             game.activeNode = destinationNode
+            game.activeNode = destinationNode
 
             --game.isOver = true -- para encerrar o game 
         end
@@ -101,7 +110,7 @@ local Engine = class("Engine")
     function Engine:getValidChoices(node)
         local result = {}
         for _, choice in pairs(node.choices) do
-            if (not choice.hasCondition) or (choice.hasCondition and choice.runCondition()) then 
+            if (not choice.hasCondition) or (choice.hasCondition and choice:runCondition()) then 
                     table.insert(result, choice)
                 end
             end
